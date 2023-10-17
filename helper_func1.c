@@ -2,8 +2,8 @@
 
 /**
  * _getline -Read The Input By User From Stdin
- * @buffer: Buffer
- * @buffer_size: buffer size
+ * @Buffer: Buffer
+ * @Buffer_size: buffer size
  * @stream: stream of data (stdin)
  * Return: number of chars readed
 */

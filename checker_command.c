@@ -2,7 +2,7 @@
 
 /**
  * is_emtyln - checks if exists a empty line
- * @buffer: input command
+ * @Buffer: input command
  * Return: 0 or 1 (int)
  */
 
@@ -22,7 +22,7 @@ int is_emtyln(char *Buffer)
 
 /**
  * comments_handle- remove everything after #
- * @buffer: input command;
+ * @Buffer: input command;
  * Return:void
  */
 void comments_handle(char *Buffer)

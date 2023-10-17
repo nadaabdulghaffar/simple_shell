@@ -4,6 +4,7 @@
         "dirent.h": "c",
         "unistd.h": "c",
         "stdio.h": "c",
-        "errno.h": "c"
+        "errno.h": "c",
+        "ctype.h": "c"
     }
 }
