@@ -61,7 +61,7 @@ char *search_path(char *command)
 	char *path_concat = NULL;
 	int i = 0, path_len = 0;
 	struct stat info;
-	char *path , *path_cpy;
+	char *path, *path_cpy;
 	path = _getenv("PATH");
 	if (stat(command, &info) == 0)
 		return (command);

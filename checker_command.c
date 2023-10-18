@@ -46,33 +46,33 @@ void comments_handle(char *Buffer)
 
 void Exit_check(char *Buffer, ssize_t buffer_size)
 {
-    if (Buffer != NULL)
-    {
-        if (strncmp(Buffer, "exit", 4) == 0)
-        {
-            int status = 0;
+	if (Buffer != NULL)
+	{
+		if (strncmp(Buffer, "exit", 4) == 0)
+		{
+			int status = 0;
 
-            if (sscanf(Buffer, "exit %d", &status) == 1)
-            {
-                free_buffer(Buffer);
-                exit(status);
-            }
-            else if (strncmp(Buffer, "exit", 4) == 0)
-            {
-                free_buffer(Buffer);
-                exit(0);
-            }
-        }
-        else if (buffer_size == -1)
-        {
-            free_buffer(Buffer);
-            exit(0);
-        }
-        
-        Buffer[strlen(Buffer) - 1] = '\0';
-    }
-    else
-    {
-        exit(0);
-    }
+			if (sscanf(Buffer, "exit %d", &status) == 1)
+			{
+				free_buffer(Buffer);
+				exit(status);
+			}
+			else if (strncmp(Buffer, "exit", 4) == 0)
+			{
+				free_buffer(Buffer);
+				exit(0);
+			}
+		}
+		else if (buffer_size == -1)
+		{
+			free_buffer(Buffer);
+			exit(0);
+		}
+		
+		Buffer[strlen(Buffer) - 1] = '\0';
+	}
+	else
+	{
+		exit(0);
+	}
 }

@@ -62,7 +62,7 @@ int main(void)
 			perror("Error");
 			free_argv(argvs);
 		}
-        free_buffer(Buffer);
+		free_buffer(Buffer);
 		free(argvs);
 	}
 	return (status);
