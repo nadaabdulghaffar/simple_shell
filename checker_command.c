@@ -41,6 +41,7 @@ void comments_handle(char *Buffer)
 /**
  * Exit_check- check if the user exit
  * @Buffer: input buffer
+ * @buffer_size: Buffer size
  * Return: void
 */
 
