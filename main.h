@@ -29,4 +29,6 @@ void free_argv(char **argv);
 void free_buffer(char *Buffer);
 void comments_handle(char *Buffer);
 void Exit_check(ssize_t buffer_size, char *Buffer);
+char *search_path(char *command);
+char **_split(char *str, char *sep);
 #endif
