@@ -27,7 +27,7 @@ int is_emtyln(char *Buffer)
  */
 void comments_handle(char *Buffer)
 {
-	unsigned int count;
+    int count;
 
 		for (count = 0; Buffer[count] != '\0'; count++)
 		{
