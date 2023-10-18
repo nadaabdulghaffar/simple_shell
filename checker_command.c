@@ -27,17 +27,22 @@ int is_emtyln(char *Buffer)
  */
 void comments_handle(char *Buffer)
 {
-    int count;
+	unsigned int count;
+	int inside_quotes = 0;
 
-		for (count = 0; Buffer[count] != '\0'; count++)
+	for (count = 0; Buffer[count] != '\0'; count++)
+	{
+		if (Buffer[count] == '"' && (count == 0 || Buffer[count-1] != '\\'))
+			inside_quotes = !inside_quotes;
+
+		if (Buffer[count] == '#' && !inside_quotes)
 		{
-			if (Buffer[count] == '#')
-			{
-				Buffer[count] = '\0';
-				break;
-			}
+			Buffer[count] = '\0';
+			break;
+		}
 	}
 }
+
 /**
  * Exit_check- check if the user exit
  * @buffer_size: buffer size
