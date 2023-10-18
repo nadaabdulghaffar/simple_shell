@@ -17,7 +17,7 @@ int main(void)
 
 		buffer_size = _getline(&Buffer, &read_size, stdin);
 		Exit_check(buffer_size, Buffer);
-		comments_handle(Buffer);
+
 		if (is_emtyln(Buffer) == 1)
 		{
 			exit_status = 0;
