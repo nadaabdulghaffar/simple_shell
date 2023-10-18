@@ -68,7 +68,7 @@ void Exit_check(char *Buffer, ssize_t buffer_size)
 			free_buffer(Buffer);
 			exit(0);
 		}
-		
+
 		Buffer[strlen(Buffer) - 1] = '\0';
 	}
 	else
