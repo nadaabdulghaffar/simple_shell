@@ -6,7 +6,7 @@
  * @Buffer_size: buffer size
  * @stream: stream of data (stdin)
  * Return: number of chars readed
-*/
+ */
 ssize_t _getline(char **Buffer, size_t *Buffer_size, FILE *stream)
 {
 	ssize_t char_count;
