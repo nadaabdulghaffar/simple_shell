@@ -27,7 +27,7 @@ int is_emtyln(char *Buffer)
  */
 void comments_handle(char *Buffer)
 {
-    int count;
+	int count;
 
 		for (count = 0; Buffer[count] != '\0'; count++)
 		{
@@ -45,12 +45,25 @@ void comments_handle(char *Buffer)
  * Return: void
 */
 
-void Exit_check(ssize_t buffer_size, char *Buffer)
+void Exit_check(char *Buffer)
 {
-	if (buffer_size <= 0 || strcmp(Buffer, "exit\n") == 0)
+
+    if (strncmp(Buffer, "exit", 4) == 0) 
 	{
-		free_buffer(Buffer);
-		exit(0);
-	}
-	Buffer[buffer_size - 1] = '\0';
+        int status = 0;
+
+        if (sscanf(Buffer, "exit %d", &status) == 1)
+		{
+            free_buffer(Buffer);
+            exit(status);
+        } 
+		else if (strncmp(Buffer, "exit", 4) == 0)
+		{
+
+            free_buffer(Buffer);
+            exit(0);
+        }
+    }
+
+    Buffer[strlen(Buffer) - 1] = '\0';
 }

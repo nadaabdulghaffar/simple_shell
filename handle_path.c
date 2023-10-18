@@ -1,22 +1,6 @@
 #include "main.h"
 
 /**
- * _getline -Read The Input By User From Stdin
- * @Buffer: Buffer
- * @Buffer_size: buffer size
- * @stream: stream of data (stdin)
- * Return: number of chars readed
- */
-ssize_t _getline(char **Buffer, size_t *Buffer_size, FILE *stream)
-{
-	ssize_t char_count;
-
-	char_count = getline(Buffer, Buffer_size, stream);
-
-	return (char_count);
-}
-
-/**
  * tokenize - tokenzie input command into array of string
  * @command: input command
  * @num_charin: size of readed chars
@@ -62,51 +46,10 @@ char **tokenize(char *command, ssize_t num_charin)
 		token = strtok(NULL, delim);
 	}
 	argv[i] = NULL;
+    free(token);
 	free(copy_command);
 	return (argv);
 }
-
-/**
- * execute_command - execute command path, child process
- * @argv: array of string
- * Return: exit status
- */
-
-int execute_command(char **argv)
-{
-	int id = fork();
-	int status;
-
-	if (id == 0)
-	{
-		if (execve(argv[0], argv, environ) == -1)
-			perror("Error");
-	}
-	else
-	{
-		wait(&status);
-		if (WIFEXITED(status))
-			status = WEXITSTATUS(status);
-	}
-	return (status);
-}
-
-/**
- * print_env - prints environment
- * Return : void
- */
-void print_env(void)
-{
-	int count = 0;
-
-	while (environ[count])
-	{
-		printf("%s\n", environ[count]);
-		count++;
-	}
-}
-
-
 
 /**
  * search_path - search file between the path
@@ -167,10 +110,10 @@ char *search_path(char *command)
 
 char **_split(char *str, char *sep)
 {
-	char *aux, **split_str;
+	char *tmp, **split_str;
 	int i = 0;
 
-	aux = strtok(str, sep);
+	tmp = strtok(str, sep);
 	split_str = (char **)malloc(100 * sizeof(char *));
 
 	if (!split_str)
@@ -179,10 +122,10 @@ char **_split(char *str, char *sep)
 		return (NULL);
 	}
 
-	while (aux)
+	while (tmp)
 	{
-		split_str[i] = aux;
-		aux = strtok(NULL, sep);
+		split_str[i] = tmp;
+		tmp = strtok(NULL, sep);
 		i++;
 	}
 	return (split_str);
