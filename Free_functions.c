@@ -16,7 +16,7 @@ void free_argv(char **argv)
 
 /**
  * free_buffer - free Buffer
- * @buffer: input command
+ * @Buffer: input command
  * Return: void
 */
 

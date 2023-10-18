@@ -5,8 +5,7 @@
  */
 int main(void)
 {
-	char *Buffer = NULL;
-	char **argvs = NULL;
+	char *Buffer = NULL, **argvs = NULL;
 	size_t read_size = 0;
 	ssize_t buffer_size = 0;
 	int exit_status = 0;
@@ -17,13 +16,7 @@ int main(void)
 			printf("$");
 
 		buffer_size = _getline(&Buffer, &read_size, stdin);
-		if (buffer_size == -1 || strcmp(Buffer, "exit\n") == 0)
-		{
-			free_buffer(Buffer);
-			break;
-		}
-		Buffer[buffer_size - 1] = '\0';
-
+		Exit_check(buffer_size, Buffer);
 		comments_handle(Buffer);
 		if (is_emtyln(Buffer) == 1)
 		{

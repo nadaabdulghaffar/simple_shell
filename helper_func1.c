@@ -97,7 +97,7 @@ int execute_command(char **argv)
  */
 void print_env(void)
 {
-    int count = 0;
+	int count = 0;
 
 	while (environ[count])
 	{

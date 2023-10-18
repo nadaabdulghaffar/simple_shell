@@ -5,6 +5,7 @@
         "unistd.h": "c",
         "stdio.h": "c",
         "errno.h": "c",
-        "ctype.h": "c"
+        "ctype.h": "c",
+        "fcntl.h": "c"
     }
 }

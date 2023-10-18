@@ -38,3 +38,19 @@ void comments_handle(char *Buffer)
 			}
 	}
 }
+/**
+ * Exit_check- check if the user exit
+ * @buffer_size: buffer size
+ * @Buffer: input buffer
+ * Return: void
+*/
+
+void Exit_check(ssize_t buffer_size, char *Buffer)
+{
+	if (buffer_size == -1 || strcmp(Buffer, "exit\n") == 0)
+	{
+		free_buffer(Buffer);
+		exit(0);
+	}
+	Buffer[buffer_size - 1] = '\0';
+}
