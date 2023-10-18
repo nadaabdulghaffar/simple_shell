@@ -27,7 +27,7 @@ int is_emtyln(char *Buffer);
 void free_argv(char **argv);
 void free_buffer(char *Buffer);
 void comments_handle(char *Buffer);
-void Exit_check(char *Buffer);  
+void Exit_check(char *Buffer);
 char *search_path(char *command);
 char **_split(char *str, char *sep);
 char *_getenv(char *env_var);

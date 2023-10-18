@@ -7,7 +7,7 @@
 
 char *_getenv(char *env_var)
 {
-	int count = 0, count2,status;
+	int count = 0, count2, status;
 
 	while (environ[count])
 	{
@@ -26,7 +26,7 @@ char *_getenv(char *env_var)
 }
 
 /**
- * print_env - prints all environment variables 
+ * print_env - prints all environment variables
  * Return : void
  */
 void print_env(void)

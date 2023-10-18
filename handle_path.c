@@ -8,9 +8,7 @@
  */
 char **tokenize(char *command, ssize_t num_charin)
 {
-	char *copy_command = NULL;
-	char *delim = " ";
-	char *token;
+	char *copy_command = NULL, *delim = " ", *token;
 	int num_token = 0, i;
 	char **argv = NULL;
 
@@ -46,7 +44,7 @@ char **tokenize(char *command, ssize_t num_charin)
 		token = strtok(NULL, delim);
 	}
 	argv[i] = NULL;
-    free(token);
+	free(token);
 	free(copy_command);
 	return (argv);
 }
@@ -59,7 +57,7 @@ char **tokenize(char *command, ssize_t num_charin)
 
 char *search_path(char *command)
 {
-	char *path = getenv("PATH"), *path_cpy;
+	char *path = _getenv("PATH"), *path_cpy;
 	char **path_split;
 	char *path_concat = NULL;
 	int i = 0, path_len = 0;
