@@ -12,7 +12,7 @@ ssize_t _getline(char **Buffer, size_t *Buffer_size, FILE *stream)
 	ssize_t char_count;
 
 	char_count = getline(Buffer, Buffer_size, stream);
-
+	comments_handle(Buffer);
 	return (char_count);
 }
 
