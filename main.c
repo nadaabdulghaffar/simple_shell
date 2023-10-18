@@ -58,9 +58,11 @@ int main(void)
 		if (argvs[0])
 			status = execute_command(argvs);
 		else
+		{
 			perror("Error");
-		free_argv(argvs);
-
+			free_argv(argvs);
+		}
+		free(argvs);
 	}
 	return (status);
 }
