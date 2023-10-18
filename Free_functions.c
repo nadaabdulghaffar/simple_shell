@@ -22,8 +22,11 @@ void free_argv(char **argv)
 
 void free_buffer(char *Buffer)
 {
-	if (Buffer != NULL && Buffer[0] != '\0')
-	{
-		free(Buffer);
-	}
+    if (Buffer != NULL)
+    {
+        if (Buffer[0] != '\0')
+        {
+            free(Buffer);
+        }
+    }
 }

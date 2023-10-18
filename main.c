@@ -41,7 +41,7 @@ int main(void)
 		if (isatty(STDIN_FILENO))
 			printf("$");
 		buffer_size = getline(&Buffer, &read_size, stdin);
-		Exit_check(Buffer);
+		Exit_check(Buffer, buffer_size);
 		comments_handle(Buffer);
 		if (is_emtyln(Buffer) == 1)
 		{
@@ -62,6 +62,7 @@ int main(void)
 			perror("Error");
 			free_argv(argvs);
 		}
+        free_buffer(Buffer);
 		free(argvs);
 	}
 	return (status);
