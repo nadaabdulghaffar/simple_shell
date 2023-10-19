@@ -8,9 +8,8 @@
  */
 char **tokenize(char *command, ssize_t num_charin)
 {
-	char *copy_command = NULL, *delim = " ", *token;
+	char *copy_command = NULL, *delim = " ", *token, **argv = NULL;
 	int num_token = 0, i;
-	char **argv = NULL;
 
 	copy_command = malloc(sizeof(char) * num_charin);
 	if (copy_command == NULL)
@@ -19,7 +18,6 @@ char **tokenize(char *command, ssize_t num_charin)
 		return (NULL);
 	}
 	strcpy(copy_command, command);
-
 	token = _strtok(copy_command, delim);
 	while (token)
 	{
@@ -27,7 +25,6 @@ char **tokenize(char *command, ssize_t num_charin)
 		token = _strtok(NULL, delim);
 	}
 	num_token++;
-
 	argv = malloc(sizeof(char *) * num_token);
 	if (argv == NULL)
 	{
@@ -35,12 +32,21 @@ char **tokenize(char *command, ssize_t num_charin)
 		return (NULL);
 	}
 	token = _strtok(command, delim);
-
-	for (i = 0 ; token; i++)
+	for (i = 0; token; i++)
 	{
 		argv[i] = malloc(sizeof(char) * (strlen(token) + 1));
+		if (argv[i] == NULL)
+		{
+			free(copy_command);
+			while (i >= 0)
+			{
+				free(argv[i]);
+				i--;
+			}
+			free(argv);
+			return (NULL);
+		}
 		strcpy(argv[i], token);
-
 		token = _strtok(NULL, delim);
 	}
 	argv[i] = NULL;
@@ -54,21 +60,20 @@ char **tokenize(char *command, ssize_t num_charin)
  * @command: cmd
  * Return: cmd path
  */
-
 char *search_path(char *command)
 {
-	char **path_split;
-	char *path_concat = NULL;
+	char **path_split, *path_concat = NULL, *path, *path_cpy;
 	int i = 0, path_len = 0;
 	struct stat info;
-	char *path, *path_cpy;
 
 	path = _getenv("PATH");
 	if (stat(command, &info) == 0)
 		return (command);
-
 	path_cpy = malloc(strlen(path) + 1);
-
+	if (path_cpy == NULL)
+	{
+		return (NULL);
+	}
 	path_cpy = strcpy(path_cpy, path);
 	path_split = _split(path_cpy, ":");
 	while (path_split[i])

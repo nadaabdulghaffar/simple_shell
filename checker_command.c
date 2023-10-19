@@ -42,10 +42,11 @@ void comments_handle(char *Buffer)
  * Exit_check- check if the user exit
  * @Buffer: input buffer
  * @buffer_size: Buffer size
+ * @argvs: array of toknzied command
  * Return: void
 */
 
-void Exit_check(char *Buffer, ssize_t buffer_size)
+void Exit_check(char *Buffer, ssize_t buffer_size, char **argvs)
 {
 	if (Buffer != NULL)
 	{
@@ -56,24 +57,23 @@ void Exit_check(char *Buffer, ssize_t buffer_size)
 			if (sscanf(Buffer, "exit %d", &status) == 1)
 			{
 				free_buffer(Buffer);
+				free_argv(argvs);
 				exit(status);
 			}
 			else if (strncmp(Buffer, "exit", 4) == 0)
 			{
 				free_buffer(Buffer);
+				free(argvs);
 				exit(0);
 			}
 		}
 		else if (buffer_size == -1)
 		{
 			free_buffer(Buffer);
+			free(argvs);
 			exit(0);
 		}
 
 		Buffer[strlen(Buffer) - 1] = '\0';
-	}
-	else
-	{
-		exit(0);
 	}
 }

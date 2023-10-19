@@ -7,6 +7,7 @@
         "errno.h": "c",
         "ctype.h": "c",
         "fcntl.h": "c",
-        "main.h": "c"
+        "main.h": "c",
+        "_strtok": "c"
     }
 }
