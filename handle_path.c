@@ -38,12 +38,7 @@ char **tokenize(char *command, ssize_t num_charin)
 		if (argv[i] == NULL)
 		{
 			free(copy_command);
-			while (i >= 0)
-			{
-				free(argv[i]);
-				i--;
-			}
-			free(argv);
+			free_argv(argv);
 			return (NULL);
 		}
 		strcpy(argv[i], token);
