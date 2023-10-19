@@ -20,11 +20,11 @@ char **tokenize(char *command, ssize_t num_charin)
 	}
 	strcpy(copy_command, command);
 
-	token = strtok(copy_command, delim);
+	token = _strtok(copy_command, delim);
 	while (token)
 	{
 		num_token++;
-		token = strtok(NULL, delim);
+		token = _strtok(NULL, delim);
 	}
 	num_token++;
 
@@ -34,14 +34,14 @@ char **tokenize(char *command, ssize_t num_charin)
 		free(copy_command);
 		return (NULL);
 	}
-	token = strtok(command, delim);
+	token = _strtok(command, delim);
 
 	for (i = 0 ; token; i++)
 	{
 		argv[i] = malloc(sizeof(char) * (strlen(token) + 1));
 		strcpy(argv[i], token);
 
-		token = strtok(NULL, delim);
+		token = _strtok(NULL, delim);
 	}
 	argv[i] = NULL;
 	free(token);
@@ -105,7 +105,7 @@ char **_split(char *str, char *sep)
 	char *tmp, **split_str;
 	int i = 0;
 
-	tmp = strtok(str, sep);
+	tmp = _strtok(str, sep);
 	split_str = (char **)malloc(100 * sizeof(char *));
 
 	if (!split_str)
@@ -117,7 +117,7 @@ char **_split(char *str, char *sep)
 	while (tmp)
 	{
 		split_str[i] = tmp;
-		tmp = strtok(NULL, sep);
+		tmp = _strtok(NULL, sep);
 		i++;
 	}
 	return (split_str);

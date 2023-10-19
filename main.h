@@ -31,4 +31,6 @@ void Exit_check(char *Buffer, ssize_t buffer_size);
 char *search_path(char *command);
 char **_split(char *str, char *sep);
 char *_getenv(char *env_var);
+int delim_check(const char *str, char lim);
+char *_strtok(char *str, const char *delim);
 #endif
