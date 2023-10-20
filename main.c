@@ -17,6 +17,7 @@ int execute_command(char **argv)
 	}
 	else
 	{
+		free_argv(argv);
 		wait(&status);
 		if (WIFEXITED(status))
 			status = WEXITSTATUS(status);
