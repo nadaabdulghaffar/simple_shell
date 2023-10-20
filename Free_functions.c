@@ -8,10 +8,14 @@ void free_argv(char **argv)
 {
 	unsigned int i;
 
-	for (i = 0; argv[i] != NULL; i++)
-		free(argv[i]);
-	free(argv);
+	if (argv == NULL)
+		return;
 
+	for (i = 0; argv[i] != NULL; i++)
+	{
+		free(argv[i]);
+	}
+	free(argv);
 }
 
 /**

@@ -25,10 +25,10 @@ char **tokenize(char *command, ssize_t num_charin)
 		token = _strtok(NULL, delim);
 	}
 	num_token++;
+	free(copy_command);
 	argv = malloc(sizeof(char *) * num_token);
 	if (argv == NULL)
 	{
-		free(copy_command);
 		return (NULL);
 	}
 	token = _strtok(command, delim);
@@ -46,7 +46,6 @@ char **tokenize(char *command, ssize_t num_charin)
 	}
 	argv[i] = NULL;
 	free(token);
-	free(copy_command);
 	return (argv);
 }
 
