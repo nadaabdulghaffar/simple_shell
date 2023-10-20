@@ -34,6 +34,7 @@ void comments_handle(char *Buffer)
 			if (Buffer[count] == '#')
 			{
 				Buffer[count] = '\0';
+				free_buffer(Buffer);
 				break;
 			}
 	}
