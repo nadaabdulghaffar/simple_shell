@@ -8,6 +8,8 @@
         "ctype.h": "c",
         "fcntl.h": "c",
         "main.h": "c",
-        "_strtok": "c"
+        "_strtok": "c",
+        "string.h": "c",
+        "wait.h": "c"
     }
 }

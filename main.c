@@ -38,6 +38,7 @@ int main(void)
 	while (1)
 	{
 		argvs = NULL;
+
 		if (isatty(STDIN_FILENO))
 			printf("$");
 		buffer_size = getline(&Buffer, &read_size, stdin);
