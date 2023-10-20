@@ -33,4 +33,7 @@ char **_split(char *str, char *sep);
 char *_getenv(char *env_var);
 unsigned int delim_check(char c, const char *str);
 char *_strtok(char *str, const char *delim);
+int setenv_command(const char *name, const char *value, int overwrite);
+int unsetenv_command(const char *name);
+int execute_set_unset_command(char **argvs);
 #endif

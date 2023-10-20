@@ -27,18 +27,23 @@ int is_emtyln(char *Buffer)
  */
 void comments_handle(char *Buffer)
 {
-	int count;
+	int inside_quotes = 0, i;
 
-		for (count = 0; Buffer[count] != '\0'; count++)
+	for (i = 0; Buffer[i] != '\0'; i++)
+	{
+		if (Buffer[i] == '\"')
 		{
-			if (Buffer[count] == '#')
-			{
-				Buffer[count] = '\0';
-				free_buffer(Buffer);
-				break;
-			}
+			inside_quotes = !inside_quotes;
+		}
+
+		if (Buffer[i] == '#' && !inside_quotes)
+		{
+			Buffer[i] = '\0';
+			break;
+		}
 	}
 }
+
 /**
  * Exit_check- check if the user exit
  * @Buffer: input buffer
@@ -46,7 +51,6 @@ void comments_handle(char *Buffer)
  * @argvs: array of toknzied command
  * Return: void
 */
-
 void Exit_check(char *Buffer, ssize_t buffer_size, char **argvs)
 {
 	if (Buffer != NULL)

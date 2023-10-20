@@ -39,7 +39,6 @@ int main(void)
 	while (1)
 	{
 		argvs = NULL;
-
 		if (isatty(STDIN_FILENO))
 			printf("$");
 		buffer_size = getline(&Buffer, &read_size, stdin);
@@ -58,7 +57,12 @@ int main(void)
 		argvs = tokenize(Buffer, buffer_size);
 		argvs[0] = search_path(argvs[0]);
 		if (argvs[0])
-			status = execute_command(argvs);
+		{
+			if (strcmp(argvs[0], "set") == 0 || strcmp(argvs[0], "unset") == 0)
+				status = execute_set_unset_command(argvs);
+			else
+				status = execute_command(argvs);
+		}
 		else
 		{
 			perror("Error");
