@@ -57,21 +57,18 @@ void Exit_check(char *Buffer, ssize_t buffer_size, char **argvs)
 
 			if (sscanf(Buffer, "exit %d", &status) == 1)
 			{
-				free_buffer(Buffer);
 				free_argv(argvs);
 				exit(status);
 			}
-			else if (strncmp(Buffer, "exit", 4) == 0)
+			else
 			{
-				free_buffer(Buffer);
-				free(argvs);
-				exit(0);
+				free_argv(argvs);
+				exit(2);
 			}
 		}
 		else if (buffer_size == -1)
 		{
-			free_buffer(Buffer);
-			free(argvs);
+			free_argv(argvs);
 			exit(0);
 		}
 
