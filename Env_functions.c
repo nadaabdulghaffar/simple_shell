@@ -103,27 +103,24 @@ int setenv_command(const char *name, const char *value, int overwrite)
 int _putenv(char *string)
 {
 	char *name, **env, **new_environ = NULL, **new_env;
+
 	if (string == NULL || strchr(string, '=') == NULL)
-		return -1;
+		return (-1);
 
 	name = strtok(string, "=");
-
 	env = environ;
-
 	while (*env != NULL)
 	{
 		if (strncmp(*env, name, strlen(name)) == 0 && (*env)[strlen(name)] == '=')
 		{
 			*env = string;
-			return 0;
+			return (0);
 		}
 		env++;
 	}
-
 	new_environ = (char **)malloc((environ_count() + 2) * sizeof(char *));
 	if (new_environ == NULL)
-		return -1;
-
+		return (-1);
 	env = environ;
 	new_env = new_environ;
 
@@ -133,15 +130,12 @@ int _putenv(char *string)
 		env++;
 		new_env++;
 	}
-
 	*new_env = string;
 	new_env++;
 	*new_env = NULL;
-
 	free(environ);
 	environ = new_environ;
-
-	return 0;
+	return (0);
 }
 
 /**
@@ -149,7 +143,7 @@ int _putenv(char *string)
  *
  * Return: The number of environment variables.
  */
-int environ_count()
+int environ_count(void)
 {
 	char **env = environ;
 	int count = 0;
@@ -160,5 +154,5 @@ int environ_count()
 		env++;
 	}
 
-	return count;
+	return (count);
 }

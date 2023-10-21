@@ -36,6 +36,6 @@ char *_strtok(char *str, const char *delim);
 int setenv_command(const char *name, const char *value, int overwrite);
 int unsetenv_command(const char *name);
 int execute_set_unset_command(char **argvs);
-int environ_count();
+int environ_count(void);
 int _putenv(char *string);
 #endif
