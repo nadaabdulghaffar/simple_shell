@@ -13,6 +13,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
+#include <linux/limits.h>
 
 #define _GNU_SOURCE
 #define _POSIX_C_SOURCE 200809L
@@ -38,4 +39,6 @@ int unsetenv_command(const char *name);
 int execute_set_unset_command(char **argvs);
 int environ_count(void);
 int _putenv(char *string);
+int change_dir(char **argvs, __attribute__((unused))int er);
+void process_command(char *Buf, int *status, size_t buf_size, char **argv);
 #endif

@@ -54,15 +54,11 @@ int main(void)
 			print_env();
 			continue;
 		}
+		process_command(Buffer, &status, buffer_size, argvs);
 		argvs = tokenize(Buffer, buffer_size);
 		argvs[0] = search_path(argvs[0]);
 		if (argvs[0])
-		{
-			if (strcmp(argvs[0], "set") == 0 || strcmp(argvs[0], "unset") == 0)
-				status = execute_set_unset_command(argvs);
-			else
-				status = execute_command(argvs);
-		}
+			status = execute_command(argvs);
 		else
 		{
 			perror("Error");
