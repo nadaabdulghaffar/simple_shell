@@ -82,3 +82,61 @@ void Exit_check(char *Buffer, ssize_t buffer_size, char **argvs)
 		Buffer[strlen(Buffer) - 1] = '\0';
 	}
 }
+
+/**
+ * execute_set_unset_command - decied which one will execute
+ * @argvs: tokenzied command
+ * Return:status
+*/
+int execute_set_unset_command(char **argvs)
+{
+	int status = 0;
+
+	if (strcmp(argvs[0], "set") == 0)
+	{
+		if (argvs[1] && argvs[2])
+			status = setenv_command(argvs[1], argvs[2], 1);
+		else
+		{
+			fprintf(stderr, "set: Missing argument(s)\n");
+			status = -1;
+		}
+	}
+	else if (strcmp(argvs[0], "unset") == 0)
+	{
+		if (argvs[1])
+			status = unsetenv_command(argvs[1]);
+		else
+		{
+			fprintf(stderr, "unset: Missing argument\n");
+			status = -1;
+		}
+	}
+
+	return (status);
+}
+/**
+ * _getenv - get env variables
+ * @env_var: env variable
+ * Return: env variable result, its content
+ */
+
+char *_getenv(char *env_var)
+{
+	int count = 0, count2, status;
+
+	while (environ[count])
+	{
+		status = 1;
+
+		for (count2 = 0; environ[count][count2] != '='; count2++)
+		{
+			if (env_var[count2] != environ[count][count2])
+				status = 0;
+		}
+		if (status == 1)
+			break;
+		count++;
+	}
+	return (&environ[count][count2 + 1]);
+}

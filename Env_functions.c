@@ -1,29 +1,4 @@
 #include "main.h"
-/**
- * _getenv - get env variables
- * @env_var: env variable
- * Return: env variable result, its content
- */
-
-char *_getenv(char *env_var)
-{
-	int count = 0, count2, status;
-
-	while (environ[count])
-	{
-		status = 1;
-
-		for (count2 = 0; environ[count][count2] != '='; count2++)
-		{
-			if (env_var[count2] != environ[count][count2])
-				status = 0;
-		}
-		if (status == 1)
-			break;
-		count++;
-	}
-	return (&environ[count][count2 + 1]);
-}
 
 /**
  * print_env - prints all environment variables
@@ -114,38 +89,76 @@ int setenv_command(const char *name, const char *value, int overwrite)
 	}
 
 	sprintf(var, "%s=%s", name, value);
-	return (putenv(var));
+	return (_putenv(var));
+}
+
+
+
+/**
+ * _putenv - Modify the environment of the current process.
+ * @string: The string in the form "name=value".
+ *
+ * Return: 0 on success, -1 on failure.
+ */
+int _putenv(char *string)
+{
+	char *name, **env, **new_environ = NULL, **new_env;
+	if (string == NULL || strchr(string, '=') == NULL)
+		return -1;
+
+	name = strtok(string, "=");
+
+	env = environ;
+
+	while (*env != NULL)
+	{
+		if (strncmp(*env, name, strlen(name)) == 0 && (*env)[strlen(name)] == '=')
+		{
+			*env = string;
+			return 0;
+		}
+		env++;
+	}
+
+	new_environ = (char **)malloc((environ_count() + 2) * sizeof(char *));
+	if (new_environ == NULL)
+		return -1;
+
+	env = environ;
+	new_env = new_environ;
+
+	while (*env != NULL)
+	{
+		*new_env = *env;
+		env++;
+		new_env++;
+	}
+
+	*new_env = string;
+	new_env++;
+	*new_env = NULL;
+
+	free(environ);
+	environ = new_environ;
+
+	return 0;
 }
 
 /**
- * execute_set_unset_command - decied which one will execute
- * @argvs: tokenzied command
- * Return:status
-*/
-int execute_set_unset_command(char **argvs)
+ * environ_count - Count the number of environment variables.
+ *
+ * Return: The number of environment variables.
+ */
+int environ_count()
 {
-	int status = 0;
+	char **env = environ;
+	int count = 0;
 
-	if (strcmp(argvs[0], "set") == 0)
+	while (*env != NULL)
 	{
-		if (argvs[1] && argvs[2])
-			status = setenv_command(argvs[1], argvs[2], 1);
-		else
-		{
-			fprintf(stderr, "set: Missing argument(s)\n");
-			status = -1;
-		}
-	}
-	else if (strcmp(argvs[0], "unset") == 0)
-	{
-		if (argvs[1])
-			status = unsetenv_command(argvs[1]);
-		else
-		{
-			fprintf(stderr, "unset: Missing argument\n");
-			status = -1;
-		}
+		count++;
+		env++;
 	}
 
-	return (status);
+	return count;
 }
